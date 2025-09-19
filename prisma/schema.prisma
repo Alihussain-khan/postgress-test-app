@@ -19,3 +19,37 @@ model User {
   name  String?                             // optional
   email String  @unique                     // must be unique
 }
+
+model AffiliateProduct {
+  id                   Int      @id @default(autoincrement())
+
+  aw_deep_link         String?
+  product_name         String?
+  aw_product_id        String?
+  merchant_product_id  String?
+  merchant_image_url   String?
+  description          String?
+  merchant_category    String?
+
+  // Money/numbers as Decimal (you can pass strings from CSV)
+  search_price         Decimal? @db.Decimal(12, 2)
+  store_price          Decimal? @db.Decimal(12, 2)
+  delivery_cost        Decimal? @db.Decimal(12, 2)
+
+  merchant_name        String?
+  merchant_id          String?
+  category_name        String?
+  category_id          String?
+  aw_image_url         String?
+  currency             String?
+  merchant_deep_link   String?
+
+  // Keep simple: store raw string from CSV (you can switch to DateTime later)
+  last_updated         String?
+  display_price        String?
+  data_feed_id         String?
+
+  @@index([aw_product_id])
+  @@index([merchant_id])
+  @@index([category_id])
+}
